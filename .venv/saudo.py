@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QPushButton, QLineEdit, \
     QPlainTextEdit
-
+# Instalar en python interpreter en ajustes "pyqt6"
 
 class FiestaPrincipal(QMainWindow):
     def __init__(self):
