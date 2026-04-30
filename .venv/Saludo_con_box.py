@@ -1,6 +1,7 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QPushButton, QLineEdit, \
-    QPlainTextEdit
+# sys.argv permite que la aplicación PyQt reciba argumentos del sistema operativo, como hacen las aplicaciones gráficas reales.
+# Aunque no pases argumentos, PyQt espera esa lista para inicializarse correctamente.
+from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget, QPushButton, QLineEdit, QPlainTextEdit
 # Instalar en python interpreter en ajustes "pyqt6"
 
 class FiestaPrincipal(QMainWindow):
@@ -26,12 +27,16 @@ class FiestaPrincipal(QMainWindow):
         # Cuadro de texto
         self.CuadroTexto = QLineEdit()
         self.CuadroTexto.setPlaceholderText("Introduce tu nombre") # Colocar texto como marca de agua dentro del cuadro
-        cajaVertical.addWidget(self.CuadroTexto)
+        cajaVertical.addWidget(self.CuadroTexto) # no importa el orden donde lo pongas puede ser después del enter o antes.
+        # Tecla 'Enter' dentro de Cuadro de texto
+        self.CuadroTexto.returnPressed.connect(self.presionado_cuadroTexto_enter) # el returnPressed es una señal propia de QLineEdit
+                                                                            # Se dispara cuando el usuario pulsa la tecla Enter mientras el foco está en ese cuadro de texto.
 
         # Botón
         botonSaludar = QPushButton("Saludar")
-        botonSaludar.clicked.connect(self.botosaludar_clickeado) # si se presiona el botón , se ejecuta el metodo
+        botonSaludar.clicked.connect(self.botonsaludar_clickeado) # si se presiona el botón , se ejecuta el metodo
         cajaVertical.addWidget(botonSaludar)
+
         # Diseño principal
         contenedor = QWidget()
         contenedor.setLayout(cajaVertical)
@@ -41,10 +46,16 @@ class FiestaPrincipal(QMainWindow):
         self.setVisible(True)
 
     # Si presionamos el botón pasa esto:
-    def botosaludar_clickeado(self):
+    def saludoPersonalizado(self):
         nome = self.CuadroTexto.text()
         if nome != "":
             self.NAsaludo.setText("Hola " + nome + ". Encantado de saludarte")
+
+    def presionado_cuadroTexto_enter(self):
+        self.saludoPersonalizado()
+
+    def botonsaludar_clickeado(self):
+        self.saludoPersonalizado()
 
 if __name__ == "__main__":
     aplicacion = QApplication(sys.argv)
