@@ -38,10 +38,15 @@ class EjemploGridLayout (QMainWindow):
         malla.addWidget(cajaAzul,0,0,1,1)
         malla.addWidget(cajaVerde,1,0,1,1)
         malla.addWidget(cajaRosa,2,0,1,1)
-        malla.addWidget(cajaAmarillo,3,0,1,1)
-        malla.addWidget(cajaMorado,4,0,1,1)
-        malla.addWidget(cajaGris,5,0,1,1)
+        malla.addWidget(cajaAmarillo,0,1,3,1)
+      #  malla.addWidget(cajaMorado,0,2,2,1)
+      #  malla.addWidget(cajaGris,2,2,1,1)
 
+        # Para las medidad de los cuadros derechos sean iguales uso qvbox
+        caixaV = QVBoxLayout()
+        caixaV.addWidget(cajaMorado)
+        caixaV.addWidget(cajaGris)
+        malla.addLayout(caixaV, 0, 2, 3, 1)
 
         # CAJA  PRINCIPAL
         Contenedor = QWidget()
